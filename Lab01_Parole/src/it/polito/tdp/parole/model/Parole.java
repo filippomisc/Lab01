@@ -1,24 +1,36 @@
 package it.polito.tdp.parole.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 public class Parole {
-		
+	
+	private String parola;
+	private Map<String , String> parole;
+//	private List<String> lista;
+	
 	public Parole() {
-		//TODO
+		
+	this.parole=new TreeMap<>();
 	}
 	
 	public void addParola(String p) {
-		//TODO
+		parole.put(p, p);
+		
+		
 	}
 	
 	public List<String> getElenco() {
-		//TODO
-		return null;
+		Collection<String> result = this.parole.values();
+		return (List<String>) result;
 	}
 	
 	public void reset() {
-		// TODO
+
+		this.parole.clear();
 	}
 
 }
