@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+
 public class Parole {
 	
-	private String parola;
 	private Map<String , String> parole;
-//	private List<String> lista;
 	
 	public Parole() {
 		
@@ -24,13 +23,23 @@ public class Parole {
 	}
 	
 	public List<String> getElenco() {
-		Collection<String> result = this.parole.values();
-		return (List<String>) result;
+		List<String> result =new ArrayList<>(this.parole.values());
+		return result;
 	}
 	
 	public void reset() {
 
 		this.parole.clear();
+	}
+	
+	public boolean delete (String p) {
+		boolean result=false;
+		if(this.parole.containsKey(p)) {
+			this.parole.remove(p);
+			result =true;
+			
+		}
+		return result;
 	}
 
 }

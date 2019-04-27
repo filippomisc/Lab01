@@ -32,6 +32,9 @@ public class ParoleController {
     @FXML // fx:id="txtResult"
     private TextArea txtResult; // Value injected by FXMLLoader
     
+    @FXML // fx:id="btnDelete"
+    private Button btnDelete; // Value injected by FXMLLoader
+    
     @FXML
     private Button btnReset;
 
@@ -40,12 +43,57 @@ public class ParoleController {
 
     @FXML
     void doInsert(ActionEvent event) {
-    	// TODO
+    	txtResult.clear();
+    	
+    	String parola = txtParola.getText().toLowerCase().trim();
+    	
+    	if(txtParola.getText().length()==0 ) {
+    		txtResult.appendText("Inserire una parola \n");
+    		return;
+    		}else {
+    	elenco.addParola(parola);
+    	
+    	for (String p : elenco.getElenco()) {
+			this.txtResult.appendText(p+"\n");
+		}}
+    	this.txtParola.clear();
+    }
+    
+    @FXML
+    void doDelete(ActionEvent event) {
+
+    	txtResult.clear();
+    	
+    	String parola = txtParola.getText().toLowerCase().trim();
+
+    	if(txtParola.getText().length()==0) {
+    		txtResult.appendText("Inserire una parola \n");
+    		return;
+    		}else {
+    	elenco.addParola(parola);
+    	
+    	
+    	boolean isDeleted = elenco.delete(parola);
+    	
+    	if(isDeleted==true) {
+    	
+	    	for (String p : elenco.getElenco()) {
+				this.txtResult.appendText(p+"\n");
+			}}
+    	
+    	if(isDeleted==false)
+				txtResult.setText("parola non eliminata perchè non presente");
+	    	
+    	
+	    	this.txtParola.clear();
+    	}
     }
     
     @FXML
     void doReset(ActionEvent event) {
-    	// TODO
+    	elenco.reset();
+    	this.txtResult.clear();
+    	this.txtParola.clear();
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
